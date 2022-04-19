@@ -1,11 +1,14 @@
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
+const register = require('./controller/register')
 const app = express()
-const port = 3000
+const port = 4000
+app.use(cors())
 
-app.get('/', (req,res)=>{
-    res.send('hello world')
-})
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+app.use('/', register)
 
 mongoose.connect('mongodb://localhost/todo-assignment')
 app.listen(port,()=>{
